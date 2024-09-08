@@ -62,7 +62,12 @@ class UserSearchView(generics.ListAPIView):
         query = self.request.query_params.get('q', None)
         if query:
             query = query.lower()
-            return User.objects.filter(Q(email__iexact=query) | Q(name__icontains=query))
+            # Check for exact email match
+            exact_email_match = User.objects.filter(email__iexact=query)
+            if exact_email_match.exists():
+                return exact_email_match
+            # Check for name substring match
+            return User.objects.filter(name__icontains=query)
         return User.objects.none()
 
 # Friend request functionalities
