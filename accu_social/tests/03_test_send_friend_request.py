@@ -25,12 +25,21 @@ def authenticate_user():
 
 @pytest.mark.django_db
 def test_send_friend_request(create_user, authenticate_user):
+    # Make sure we have two users in the database
     user1 = create_user('user_sendfrendrequest1@example.com', 'password1', 'User One')
     user2 = create_user('user_sendfrendrequest2@example.com', 'password2', 'User Two')
+
+    # Authenticate as user1
     token = authenticate_user('user_sendfrendrequest1@example.com', 'password1')
     client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+    # Send a friend request to user2
     response = client.post(reverse('send-friend-request', kwargs={'user_id': user2.id}))
+
+    # Check that the response was successful
     assert response.status_code == status.HTTP_201_CREATED
+
+    # Check that the friend request was successfully created
     assert FriendRequest.objects.filter(from_user=user1, to_user=user2).exists()
 
 if __name__ == '__main__':
