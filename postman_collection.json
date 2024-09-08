@@ -20,6 +20,7 @@
           "mode": "raw",
           "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"Test User\"\n}"
         },
+        "description": "Register a new user with email, password, and name. Email should be case-insensitive.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/signup/",
           "protocol": "http",
@@ -51,6 +52,7 @@
           "mode": "raw",
           "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
         },
+        "description": "Authenticate a user with email and password. Email should be case-insensitive.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/login/",
           "protocol": "http",
@@ -83,8 +85,9 @@
             "type": "text"
           }
         ],
+        "description": "Search for users by email or name. Paginate up to 10 records per page.",
         "url": {
-          "raw": "http://localhost:8000/api/userAuth/search/?q=test",
+          "raw": "http://localhost:8000/api/userAuth/search/?q=test&page=1",
           "protocol": "http",
           "host": [
             "localhost"
@@ -100,7 +103,12 @@
             {
               "key": "q",
               "value": "test",
-              "description": ""
+              "description": "Search keyword for email or name"
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number for pagination"
             }
           ]
         }
@@ -122,6 +130,7 @@
             "type": "text"
           }
         ],
+        "description": "Send a friend request to a user by ID. Users can send up to 3 requests per minute.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/friend-request/send/1/",
           "protocol": "http",
@@ -156,6 +165,7 @@
             "type": "text"
           }
         ],
+        "description": "Accept a friend request from a user by ID.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/friend-request/accept/1/",
           "protocol": "http",
@@ -190,6 +200,7 @@
             "type": "text"
           }
         ],
+        "description": "List all friends of the authenticated user.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/friends/",
           "protocol": "http",
@@ -222,6 +233,7 @@
             "type": "text"
           }
         ],
+        "description": "List all pending friend requests for the authenticated user.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/pending-requests/",
           "protocol": "http",
@@ -254,6 +266,7 @@
             "type": "text"
           }
         ],
+        "description": "Reject a friend request from a user by ID.",
         "url": {
           "raw": "http://localhost:8000/api/userAuth/reject_request/1/",
           "protocol": "http",

@@ -8,6 +8,7 @@ urlpatterns = [
     path('friend-request/send/<int:user_id>/', send_friend_request, name='send-friend-request'),
     path('friend-request/accept/<int:request_id>/', accept_friend_request, name='accept-friend-request'),
     path('reject_request/<int:request_id>/', reject_friend_request, name='reject_friend_request'),
-    path('friends/<int:user_id>/', list_friends, name='list-friends'),
+    path('friends/', list_friends, name='list-friends'),
+    path('friends/<int:user_id>/', list_friends, name='list-friends-by-id'),
     path('pending-requests/', list_pending_requests, name='list-pending-requests'),
 ]

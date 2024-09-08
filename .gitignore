@@ -13,8 +13,7 @@ db.sqlite3
 
 # Environment folders
 venv/
-env/
-accu_env/
+
 
 # IDE-specific files (if applicable)
 .vscode/
@@ -45,3 +44,4 @@ coverage.xml
 .pytest_cache/
 
 userAuth\migrations
+

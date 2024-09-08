@@ -110,12 +110,14 @@ def accept_friend_request(request, request_id):
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
-def list_friends(request, user_id):
-    # Fetch the user object using the user_id
-    user = get_object_or_404(User, id=user_id)
+def list_friends(request, user_id=None):
+    if user_id is None:
+        user = request.user
+    else:
+        user = get_object_or_404(User, id=user_id)
     
     # Fetch the friends list for the user
-    friends = FriendRequest.objects.filter(from_user=user, accepted=True).values_list('to_user', flat=True)
+    friends = FriendRequest.objects.filter(Q(from_user=user, accepted=True) | Q(to_user=user, accepted=True)).values_list('to_user', flat=True)
     friends_list = User.objects.filter(id__in=friends)
     
     # Serialize the friends list
